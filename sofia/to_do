@@ -1,0 +1,6 @@
+# Review the number of elements in each class
+# Target column is the target variable, the one we are trying to predict
+# Numerical columns and Categorical columns 
+# For categorical values we can look at the distribution of values (e.g. how many men/women) so we can find imbalances
+# Training a model with data imbalances can cause disproportioned prediction errors for the under-represented groups
+# Having redundant (or highly correlated) columns can be a problem for machine learning algorithms.
