@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 from sklearn.preprocessing import OrdinalEncoder
 
 # === Load data from parent directory ===
@@ -67,6 +68,37 @@ if not set(categorical_cols).issubset(df.columns):
 
 df[categorical_cols] = encoder.fit_transform(df[categorical_cols])
 print(f"🏷️ Encoded categorical columns: {categorical_cols}")
+
+# Recompute price_per_m2 for EDA
+df['price_square_meter'] = df['price'] / df['habitableSurface']
+
+# Remove negative or zero values
+df = df[df['price'] > 0]
+df = df[df['habitableSurface'] > 0]
+df = df[df['price_square_meter'] > 0]
+
+# Save encodings 
+# Create output directory if it doesn't exist
+os.makedirs("encoding_maps", exist_ok=True)
+
+# Define your mappings
+type_map = {"house": 0, "apartment": 1}
+subtype_map = {v: i for i, v in enumerate(df["subtype"].dropna().unique())}
+condition_map = {
+    "TO_RENOVATE": 0,
+    "TO_RESTORE": 1,
+    "GOOD": 2,
+    "JUST_RENOVATED": 3,
+    "AS_NEW": 4,
+    "NEW": 5,
+}
+region_map = {v: i for i, v in enumerate(df["region"].dropna().unique())}
+
+# Save each mapping as Excel
+pd.DataFrame(type_map.items(), columns=["label", "code"]).to_excel("encoding_maps/type_encoding.xlsx", index=False)
+pd.DataFrame(subtype_map.items(), columns=["label", "code"]).to_excel("encoding_maps/subtype_encoding.xlsx", index=False)
+pd.DataFrame(condition_map.items(), columns=["label", "code"]).to_excel("encoding_maps/condition_encoding.xlsx", index=False)
+pd.DataFrame(region_map.items(), columns=["label", "code"]).to_excel("encoding_maps/region_encoding.xlsx", index=False)
 
 # === Final check ===
 print(f"✅ Final shape: {df.shape}")
