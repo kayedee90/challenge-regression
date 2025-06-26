@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Load dataset
-df = pd.read_csv("immoweb-dataset-clean.csv")  # Update with your actual file name
+df = pd.read_csv("../data/raw_data.csv")  # Update with your actual file name
 
 # 1. Remove duplicates
 df.drop_duplicates(inplace=True)
