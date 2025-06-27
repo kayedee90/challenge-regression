@@ -38,7 +38,7 @@ print(df.head())
 
 
 # === Drop unused or problematic columns ===
-columns_to_drop = ['id', 'url', 'MunicipalityCleanName', 'price_square_meter']
+columns_to_drop = ['id', 'url', 'MunicipalityCleanName', 'price_square_meter', 'locality']
 df.drop(columns=columns_to_drop, inplace=True, errors='ignore')
 print(f"🧹 Dropped columns: {columns_to_drop}")
 
