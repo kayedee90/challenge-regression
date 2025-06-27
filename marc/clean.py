@@ -83,14 +83,14 @@ os.makedirs("encoding_maps", exist_ok=True)
 
 # Define your mappings
 type_map = {"house": 0, "apartment": 1}
-subtype_map = {v: i for i, v in enumerate(df["subtype"].dropna().unique())}
+# subtype_map = {v: i for i, v in enumerate(df["subtype"].dropna().unique())}
 condition_map = {
-    "TO_RENOVATE": 0,
-    "TO_RESTORE": 1,
-    "GOOD": 2,
-    "JUST_RENOVATED": 3,
-    "AS_NEW": 4,
-    "NEW": 5,
+    'AS_NEW': 5,
+    'JUST_RENOVATED': 4,
+    'GOOD': 3,
+    'TO_RENOVATE': 2,
+    'TO_BE_DONE_UP': 2,
+    'TO_RESTORE': 1
 }
 region_map = {v: i for i, v in enumerate(df["region"].dropna().unique())}
 
