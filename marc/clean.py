@@ -100,6 +100,7 @@ pd.DataFrame(type_map.items(), columns=["label", "code"]).to_excel("encoding_map
 pd.DataFrame(condition_map.items(), columns=["label", "code"]).to_excel("encoding_maps/condition_encoding.xlsx", index=False)
 pd.DataFrame(region_map.items(), columns=["label", "code"]).to_excel("encoding_maps/region_encoding.xlsx", index=False)
 
+
 # === Final check ===
 print(f"✅ Final shape: {df.shape}")
 print("✅ Sample of cleaned data:")
