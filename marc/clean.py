@@ -59,7 +59,7 @@ df[object_cols] = df[object_cols].fillna("Unknown")
 print(f"🧮 Filled NaNs in object columns with 'Unknown'")
 
 # === Encode categorical columns using OrdinalEncoder ===
-categorical_cols = ['type', 'subtype', 'province', 'region', 'buildingCondition', 'epcScore']
+categorical_cols = ['type', 'province', 'region', 'buildingCondition', 'epcScore']
 encoder = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1)
 
 if not set(categorical_cols).issubset(df.columns):
@@ -96,7 +96,7 @@ region_map = {v: i for i, v in enumerate(df["region"].dropna().unique())}
 
 # Save each mapping as Excel
 pd.DataFrame(type_map.items(), columns=["label", "code"]).to_excel("encoding_maps/type_encoding.xlsx", index=False)
-pd.DataFrame(subtype_map.items(), columns=["label", "code"]).to_excel("encoding_maps/subtype_encoding.xlsx", index=False)
+# pd.DataFrame(subtype_map.items(), columns=["label", "code"]).to_excel("encoding_maps/subtype_encoding.xlsx", index=False)
 pd.DataFrame(condition_map.items(), columns=["label", "code"]).to_excel("encoding_maps/condition_encoding.xlsx", index=False)
 pd.DataFrame(region_map.items(), columns=["label", "code"]).to_excel("encoding_maps/region_encoding.xlsx", index=False)
 
