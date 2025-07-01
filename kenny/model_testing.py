@@ -1,19 +1,16 @@
+
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.ensemble import StackingRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
-import matplotlib.pyplot as plt
-
-"""
-REMOVED PPM² FROM DATASET TO FIX 100% ACCURACY
-Model explains about 59.0% of the variation in property prices.
-Squared difference between predicted and actual prices is €119,698.
-"""
+from sklearn.metrics import root_mean_squared_error, r2_score, mean_absolute_error, mean_absolute_percentage_error
+# Import Models
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
+from sklearn.ensemble import HistGradientBoostingRegressor
+from xgboost import XGBRegressor
 
 # Load the dataset
 df = pd.read_csv(r"C:\Users\difke\becode\Projects\challenge-regression\data\raw_data.csv")
@@ -38,85 +35,62 @@ epc_map = {
     'A+': 7,
     'A++': 8
 }
+
+# Apply the mappings
 df['epcScore'] = df['epcScore'].map(epc_map)
+df['buildingCondition'] = df['buildingCondition'].map(condition_map)
 
+# Feature setup
+num_features = ['habitableSurface', 'bedroomCount', 'hasGarden', 'gardenSurface', 'hasTerrace', 'hasParking']
+cat_features = ['postCode', 'subtype', 'epcScore', 'buildingCondition']
 
-# Create a list of numerical features to compute from
-num_features = [
-    'habitableSurface', 
-    'bedroomCount',
-    'hasGarden',
-    'gardenSurface',
-    'hasTerrace',
-    'hasParking'
-    ]
-# Create a list of categorical features to compute from
-cat_features = ['postCode','subtype','epcScore','buildingCondition']
-# Combine into 1 feature list
 features = num_features + cat_features
+X = df[features].copy()
 
-# X: feed the features to the model
-X = df[features]
-# y: the feature to predict
-y = df['price']
+y = np.log1p(df['price'])  # log-transformed target
 
-# Split the dataset 20/80 for training and testing
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=1
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+
+#create preprocessor to separate approaches for each model
+preprocessor = ColumnTransformer([
+    ('num', 'passthrough', num_features),
+    ('cat', OneHotEncoder(handle_unknown='ignore', drop='first', sparse_output=False), cat_features)
+])
+
+# Fit preprocessor and transform data
+X_train_processed = preprocessor.fit_transform(X_train)
+X_test_processed = preprocessor.transform(X_test)
+
+# Define stacked model
+stacked_model = StackingRegressor(
+    estimators=[
+        ('ridge', Ridge(alpha=1)),
+        ('hist', HistGradientBoostingRegressor(max_iter=500, max_depth=10, random_state=1)),
+        ('xgb', XGBRegressor(n_estimators=200, learning_rate= 0.03,max_depth=15, n_jobs=-1, random_state=1))
+    ],
+    final_estimator=LinearRegression(),
+    n_jobs=-1
 )
 
-# Create an impution strategy for missing values
-num_imputer = SimpleImputer(strategy='mean') # Take the mean for missing values
-cat_imputer = OneHotEncoder(handle_unknown='ignore') # Ignore missing values
+# Train stacked model
+stacked_model.fit(X_train_processed, y_train)
+y_pred = stacked_model.predict(X_test_processed)
 
-# Combine impution strategies
-preprocessor = ColumnTransformer([
-    ('num', num_imputer, num_features),
-    ('cat', cat_imputer, cat_features)
-])
+# Convert predictions back to original scale
+y_test_original = np.expm1(y_test)
+y_pred_original = np.expm1(y_pred)
 
+# Calculate metrics
+r2 = r2_score(y_test, y_pred)
+rmse = root_mean_squared_error(y_test_original, y_pred_original)
+mae = mean_absolute_error(y_test_original, y_pred_original)
+mape = mean_absolute_percentage_error(y_test_original, y_pred_original)
 
-# Create a pipeline for the impution strategy
-model_pipeline = Pipeline([
-    ('imputer', preprocessor),
-    ('model', RandomForestRegressor(
-        n_estimators=20,        # fewer trees = faster
-        max_depth=10,           # restrict how deep they grow
-        n_jobs=-1,              # use all your CPU cores
-        random_state=1
-    ))
-])
-
-
-model_pipeline.fit(X_train, y_train)
-
-y_prediction = model_pipeline.predict(X_test)
-
-
-# Grab the actual model from the pipeline
-forest = model_pipeline.named_steps['model']
-
-# Get feature names after preprocessing
-feature_names = model_pipeline.named_steps['imputer']\
-    .get_feature_names_out()
-
-# Get importances and pair them with names
-importances = pd.Series(forest.feature_importances_, index=feature_names)
-
-top_features = importances.sort_values(ascending=False).head(15)
-
-# Sort and plot
-top_features.sort_values(ascending=True).plot(kind='barh', figsize=(10, 6))
-plt.title("Feature Importance from Random Forest")
-plt.xlabel("Importance Score")
-plt.tight_layout()
-plt.show()
-
-
-
-mse = mean_squared_error(y_test, y_prediction)
-r2 = r2_score(y_test, y_prediction)
-rmse = mse ** 0.5
-print(f"Model explains about {r2 * 100:.1f}% of the variation in property prices.") #test variation
-print(f"Squared difference between predicted and actual prices is €{rmse:,.0f}.") #test mean squared
-
+# Display results
+print("\nStacked Ensemble Performance:")
+print("=========")
+print(f"R²: {r2 * 100:.1f}%")
+print(f"RMSE: €{rmse:,.0f}")
+print(f"MAE: €{mae:,.0f}")
+print(f"MAPE: {mape * 100:.2f}%")

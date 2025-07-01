@@ -6,7 +6,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error,mean_absolute_percentage_error
 import matplotlib.pyplot as plt
 
 """
@@ -39,7 +39,8 @@ epc_map = {
     'A++': 8
 }
 df['epcScore'] = df['epcScore'].map(epc_map)
-
+#print(df['epcScore'].value_counts().sort_index())
+#print(df['buildingCondition'].value_counts().sort_index())
 
 # Create a list of numerical features to compute from
 num_features = [
@@ -62,7 +63,7 @@ y = df['price']
 
 # Split the dataset 20/80 for training and testing
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=1
+    X, y, test_size=0.3, random_state=1
 )
 
 # Create an impution strategy for missing values
@@ -80,43 +81,30 @@ preprocessor = ColumnTransformer([
 model_pipeline = Pipeline([
     ('imputer', preprocessor),
     ('model', RandomForestRegressor(
-        n_estimators=20,        # fewer trees = faster
-        max_depth=10,           # restrict how deep they grow
+        n_estimators=100,        # fewer trees = faster
+        max_depth=15,           # restrict how deep they grow
         n_jobs=-1,              # use all your CPU cores
         random_state=1
     ))
 ])
 
-
+# Define the model pipeline
 model_pipeline.fit(X_train, y_train)
-
+# Define the prediction param
 y_prediction = model_pipeline.predict(X_test)
-
-
-# Grab the actual model from the pipeline
-forest = model_pipeline.named_steps['model']
+# Grab model from pipeline
+model = model_pipeline.named_steps['model']
 
 # Get feature names after preprocessing
-feature_names = model_pipeline.named_steps['imputer']\
-    .get_feature_names_out()
-
-# Get importances and pair them with names
-importances = pd.Series(forest.feature_importances_, index=feature_names)
-
-top_features = importances.sort_values(ascending=False).head(15)
-
-# Sort and plot
-top_features.sort_values(ascending=True).plot(kind='barh', figsize=(10, 6))
-plt.title("Feature Importance from Random Forest")
-plt.xlabel("Importance Score")
-plt.tight_layout()
-plt.show()
-
-
-
-mse = mean_squared_error(y_test, y_prediction)
-r2 = r2_score(y_test, y_prediction)
-rmse = mse ** 0.5
-print(f"Model explains about {r2 * 100:.1f}% of the variation in property prices.") #test variation
-print(f"Squared difference between predicted and actual prices is €{rmse:,.0f}.") #test mean squared
+feature_names = model_pipeline.named_steps['imputer'].get_feature_names_out()
+feature_names = [name.replace('num__', '').replace('cat__', '') for name in feature_names]
+importances = pd.Series(model.feature_importances_, index=feature_names)
+importance_df = importances.sort_values(ascending=False).reset_index()
+print(importance_df.head(15))
+print("------")
+print(f"  R² Score: {r2 * 100:.1f}%")
+print(f"  RMSE: €{rmse:,.0f}")
+print(f"  MAE: €{mae:,.0f}")
+print(f"  MAPE: {mape * 100:.2f}%")
+print("------")
 
