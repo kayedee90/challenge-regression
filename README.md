@@ -122,6 +122,14 @@ Catboost per subtype -
 Outcomes and Visualization in folder figures
 
 ### Moussa  
+models explored :
+random forest
+grandient boosting
+decision  tree 
+KNN
+Lasso
+Linear regression
+Ridge
 
 ### Kenny  
 - Started with zero experience in modeling — completely new to the concept
