@@ -15,6 +15,7 @@ from xgboost import XGBRegressor
 # Load the dataset
 df = pd.read_csv(r"C:\Users\difke\becode\Projects\challenge-regression\data\raw_data.csv")
 
+# Assign values to buildingCondition and epcScore
 condition_map = {
     "TO_RESTORE": 0,
     "TO_BE_DONE_UP": 1,
