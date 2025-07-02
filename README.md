@@ -6,7 +6,7 @@ This repository contains our solution to the **Regression Challenge** for predic
 ---
 
 ### 🚀 Installation
-
+Python 3.13.2
 ```
 
 ---
