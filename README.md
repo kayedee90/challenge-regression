@@ -89,8 +89,17 @@ The model will produce 2 output files:
 
 ---
 
-### 🧩 Personal Situation
-Each team member contributed specific components while collaborating across Git and reviewing each other's modules through pull requests.
+### 🧩 Individual contributions
+Each team member contributed specific components while collaborating across Git and reviewing each other's modules through pull requests.  
+### Sofia  
+  
+### Marc  
+
+
+
+### Moussa  
+
+### Kenny  
 
 ---
 
