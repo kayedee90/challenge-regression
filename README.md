@@ -95,29 +95,29 @@ Each team member contributed specific components while collaborating across Git 
   
 ### Marc  
 
-Subfolder Marc
+Subfolder Marc  
+  
+Cleaning in clean.py,  
+EDA in Jupyter notebook eda.ipynb,  
+ML model and pipelines in model_pipeline.ipynb  
 
-Cleaning in clean.py,
-EDA in Jupyter notebook eda.ipynb,
-ML model and pipelines in model_pipeline.ipynb
-
-Models Explored : 
-Linear Regression
-Linear Regression Log Tranformed
-Ridge Regression on Log-Transformed
-Random Forest
-Random Forest Top Feat/Clust
-Lasso
-Elasticnet?
-Catboost All
-Catboost Top Feat
-Catboost Optuna Tuned All
-Catboost Optuna Tuned Top Feat
-Catboost Refined Top Feat
-CatBoost Quantile Regression
-Catboost House
-Catboost Apartment
-Catboost per subtype
+Models Explored :   
+Linear Regression -
+Linear Regression Log Tranformed -
+Ridge Regression on Log-Transformed -
+Random Forest -
+Random Forest Top Feat/Clust -
+Lasso -
+Elasticnet? -
+Catboost All -
+Catboost Top Feat -
+Catboost Optuna Tuned All -
+Catboost Optuna Tuned Top Feat -
+Catboost Refined Top Feat -
+CatBoost Quantile Regression -
+Catboost House -
+Catboost Apartment -
+Catboost per subtype -  
 
 Outcomes and Visualization in folder figures
 
