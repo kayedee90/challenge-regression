@@ -101,7 +101,7 @@ Cleaning in clean.py
 EDA in Jupyter notebook eda.ipynb
 ML model and pipelines in model_pipeline.ipynb
 
-Models Developed
+Models Explored
 Linear Regression
 Linear Regression Log Tranformed
 Ridge Regression on Log-Transformed
@@ -119,6 +119,7 @@ Catboost House
 Catboost Apartment
 Catboost per subtype
 
+Outcomes and Visualization in folder figures
 
 ### Moussa  
 
