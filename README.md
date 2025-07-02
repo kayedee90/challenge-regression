@@ -124,6 +124,21 @@ Outcomes and Visualization in folder figures
 ### Moussa  
 
 ### Kenny  
+- Started with zero experience in modeling — completely new to the concept
+- Learned the foundations through Multiple Linear Regression (MLR)
+- Expanded to 7 different models to compare performance:
+-- MLR (Multiple Linear Regression)
+-- RandomForest
+-- GradientBoosting
+-- Ridge
+-- XGBoost
+-- CatBoost
+-- Lasso
+- Learned how to optimize model performance by tuning hyperparameters — from tree depth to learning rates
+- Built a loop to train and evaluate models efficiently
+- Explored model stacking to boost results by combining strengths
+- Gained insights into categorical handling, target transformation, and the importance of tailored preprocessing
+
 
 ---
 
