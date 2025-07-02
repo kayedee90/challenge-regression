@@ -135,7 +135,7 @@ Outcomes and Visualization in folder figures
 -- CatBoost
 -- Lasso
 - Learned how to optimize model performance by tuning hyperparameters — from tree depth to learning rates
-- Built a loop to train and evaluate models efficiently
+- Built a loop to train and evaluate multiple models efficiently
 - Explored model stacking to boost results by combining strengths
 - Gained insights into categorical handling, target transformation, and the importance of tailored preprocessing
 
