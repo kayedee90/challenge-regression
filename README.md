@@ -94,7 +94,7 @@ Each team member contributed specific components while collaborating across Git 
 ### Sofia  
 I used 5 Machine Learning Models to create the Price forecasting model, aiming to improve its accuracy. The main differences across these models were focused on adding/removing variables and testing for overfitting. Below is a summary of the models tested, their differences, performance and key learnings.
 
-![image](https://github.com/user-attachments/assets/390e560e-8a41-443f-9eeb-0b0dacc165d4)
+![image](https://github.com/user-attachments/assets/222602f8-6b93-430e-a388-1f64427eaa1f)
 
 ### Marc  
 
