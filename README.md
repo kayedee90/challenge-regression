@@ -122,7 +122,8 @@ Catboost House -
 Catboost Apartment -
 Catboost per subtype -  
 
-Outcomes and Visualization in folder figures
+Visualization in folder /figures, outcomes below :  
+![image](https://github.com/user-attachments/assets/4095b5a4-540c-43db-81f8-f8e17feb37de)
 
 ### Moussa  
 models explored :    
