@@ -92,7 +92,10 @@ The model will produce 2 output files:
 ### 🧩 Individual contributions
 Each team member contributed specific components while collaborating across Git and reviewing each other's modules through pull requests.  
 ### Sofia  
-  
+I used 5 Machine Learning Models to create the Price forecasting model, aiming to improve its accuracy. The main differences across these models were focused on adding/removing variables and testing for overfitting. Below is a summary of the models tested, their differences, performance and key learnings.
+
+![image](https://github.com/user-attachments/assets/390e560e-8a41-443f-9eeb-0b0dacc165d4)
+
 ### Marc  
 
 Subfolder marc  
