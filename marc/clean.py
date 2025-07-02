@@ -59,7 +59,7 @@ df[object_cols] = df[object_cols].fillna("Unknown")
 print(f"🧮 Filled NaNs in object columns with 'Unknown'")
 
 # === Encode categorical columns using OrdinalEncoder ===
-categorical_cols = ['type', 'subtype', 'province', 'region', 'buildingCondition', 'epcScore']
+categorical_cols = ['type', 'province', 'region', 'buildingCondition', 'epcScore']
 encoder = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1)
 
 if not set(categorical_cols).issubset(df.columns):
@@ -83,22 +83,23 @@ os.makedirs("encoding_maps", exist_ok=True)
 
 # Define your mappings
 type_map = {"house": 0, "apartment": 1}
-subtype_map = {v: i for i, v in enumerate(df["subtype"].dropna().unique())}
+# subtype_map = {v: i for i, v in enumerate(df["subtype"].dropna().unique())}
 condition_map = {
-    "TO_RENOVATE": 0,
-    "TO_RESTORE": 1,
-    "GOOD": 2,
-    "JUST_RENOVATED": 3,
-    "AS_NEW": 4,
-    "NEW": 5,
+    'AS_NEW': 5,
+    'JUST_RENOVATED': 4,
+    'GOOD': 3,
+    'TO_RENOVATE': 2,
+    'TO_BE_DONE_UP': 2,
+    'TO_RESTORE': 1
 }
 region_map = {v: i for i, v in enumerate(df["region"].dropna().unique())}
 
 # Save each mapping as Excel
 pd.DataFrame(type_map.items(), columns=["label", "code"]).to_excel("encoding_maps/type_encoding.xlsx", index=False)
-pd.DataFrame(subtype_map.items(), columns=["label", "code"]).to_excel("encoding_maps/subtype_encoding.xlsx", index=False)
+# pd.DataFrame(subtype_map.items(), columns=["label", "code"]).to_excel("encoding_maps/subtype_encoding.xlsx", index=False)
 pd.DataFrame(condition_map.items(), columns=["label", "code"]).to_excel("encoding_maps/condition_encoding.xlsx", index=False)
 pd.DataFrame(region_map.items(), columns=["label", "code"]).to_excel("encoding_maps/region_encoding.xlsx", index=False)
+
 
 # === Final check ===
 print(f"✅ Final shape: {df.shape}")
