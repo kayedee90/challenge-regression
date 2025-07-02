@@ -1,0 +1,12 @@
+Train_R2;Train_RMSE;Train_MAE;Test_R2;Test_RMSE;Test_MAE;filename;
+0.411;143.812.923;104.560.028;0.427;142.691.869;103.719.238;metrics_regression.txt;
+0.637;112.865.935;81.958.448;0.642;112.813.448;82.583.155;metrics_regression_target_enc_pc.txt;
+0.667;108.111.958;78.986.076;0.669;108.445.767;79.694.247;metrics_regression_target_enc_ALL.txt;
+0.951;41.378.358;28.020.976;0.694;104277.03;72.054.709;metrics_random_forest_topfeatures.txt;overfitting
+0.965;34.906.136;23.949.704;0.753;93.585.448;64.536.975;metrics_randomforest.txt;overfitting
+0.791;85710.71;60.552.066;0.759;92.604.489;64709.44;metrics_xgboost_topfeatures.txt;
+0.793;85232.49;57.846.625;0.762;91.872.401;62.678.283;metrics_xgboost_log.txt;
+0.804;82.856.016;58173.05;0.77;90294.98;62.897.418;metrics_xgboost.txt;
+0.836;75.780.562;53102.78;0.785;87.411.633;60180.94;metrics_catboost.txt;
+0.842;74.531.352;52.102.676;0.787;87.010.574;59.994.505;metrics_lightgbm.txt;
+0.862;69.531.229;48762.98;0.797;84.986.188;58355.17;metrics_lightgbm_Optuna.txt;

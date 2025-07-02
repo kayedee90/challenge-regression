@@ -3,4 +3,8 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 .DS_Store
+<<<<<<< HEAD
 random_forest_model.pkl
+=======
+marc/catboost_info
+>>>>>>> 60e4c7313c48a5f1d6aae75508c1176d0fa4401e

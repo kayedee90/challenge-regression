@@ -1,9 +1,10 @@
-from functions import DataAnalysis 
+from sofia.functions import DataAnalysis
+import os
 
 def main():
     dataviz = DataAnalysis()
 
-    df = dataviz.read_csv("./raw_data_sm.csv")
+    df = dataviz.read_csv("data/raw_data.csv")
     
     df = dataviz.drop_column(df)
 

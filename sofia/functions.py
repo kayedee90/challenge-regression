@@ -1,6 +1,5 @@
 import pandas as pd
-
-
+print("LOADED FUNCTION MODULE:", __file__)
 class DataAnalysis:
         
     def read_csv(self, path):
