@@ -97,11 +97,11 @@ Each team member contributed specific components while collaborating across Git 
 
 Subfolder Marc
 
-Cleaning in clean.py
-EDA in Jupyter notebook eda.ipynb
+Cleaning in clean.py,
+EDA in Jupyter notebook eda.ipynb,
 ML model and pipelines in model_pipeline.ipynb
 
-Models Explored
+Models Explored : 
 Linear Regression
 Linear Regression Log Tranformed
 Ridge Regression on Log-Transformed
