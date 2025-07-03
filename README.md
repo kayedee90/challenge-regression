@@ -92,7 +92,11 @@ The model will produce 2 output files:
 ### 🧩 Individual contributions
 Each team member contributed specific components while collaborating across Git and reviewing each other's modules through pull requests.  
 ### Sofia  
-  
+I used 5 Machine Learning Models to create the Price forecasting model, aiming to improve its accuracy. The main differences across these models were focused on adding/removing variables and testing for overfitting. Below is a summary of the models tested, their differences, performance and key learnings.
+
+![image](https://github.com/user-attachments/assets/b67b8232-1917-4bd1-b2be-2d5311c2fe84)
+
+
 ### Marc  
 
 Subfolder marc  
@@ -119,11 +123,35 @@ Catboost House -
 Catboost Apartment -
 Catboost per subtype -  
 
-Outcomes and Visualization in folder figures
+Visualization in folder /figures, outcomes below :  
+![image](https://github.com/user-attachments/assets/4095b5a4-540c-43db-81f8-f8e17feb37de)
 
 ### Moussa  
+models explored :    
+random forest   
+grandient boosting   
+decision  tree   
+KNN   
+Lasso   
+Linear regression   
+Ridge
 
 ### Kenny  
+- Started with zero experience in modeling — completely new to the concept
+- Learned the foundations through Multiple Linear Regression (MLR)
+- Expanded to 7 different models to compare performance:
+-- MLR (Multiple Linear Regression)
+-- RandomForest
+-- GradientBoosting
+-- Ridge
+-- XGBoost
+-- CatBoost
+-- Lasso
+- Learned how to optimize model performance by tuning hyperparameters — from tree depth to learning rates
+- Built a loop to train and evaluate multiple models efficiently
+- Explored model stacking to boost results by combining strengths
+- Gained insights into categorical handling, target transformation, and the importance of tailored preprocessing
+
 
 ---
 
