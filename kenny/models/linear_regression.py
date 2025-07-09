@@ -7,7 +7,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error,mean_absolute_percentage_error
-
+import joblib
 """
 Model explains about 82.0% of the variation in property prices.
 Squared difference between predicted and actual prices is €79,012.
